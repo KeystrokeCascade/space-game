@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://iv2dfuiw0yk4"]
+
+[ext_resource type="Texture2D" uid="uid://cjgqtukipkohd" path="res://art/glowtube.png" id="1_6kih6"]
+[ext_resource type="Script" path="res://item.gd" id="1_c4xoq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_87652"]
+size = Vector2(60, 15)
+
+[node name="Item" type="Area2D"]
+show_behind_parent = true
+script = ExtResource("1_c4xoq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_6kih6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_87652")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

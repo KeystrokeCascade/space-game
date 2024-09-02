@@ -1,0 +1,103 @@
+[gd_scene load_steps=20 format=3 uid="uid://doemuruh5qje5"]
+
+[ext_resource type="Texture2D" uid="uid://dxjkemg6lomhn" path="res://art/alien-01.png" id="1_jclsd"]
+[ext_resource type="Script" path="res://mine.gd" id="1_jlscr"]
+[ext_resource type="Texture2D" uid="uid://b8nbqwma7vjbe" path="res://art/alien-02.png" id="2_mx2gs"]
+[ext_resource type="Texture2D" uid="uid://civm2ou7oxry5" path="res://art/alien-03.png" id="3_2wf4j"]
+[ext_resource type="Texture2D" uid="uid://dpk3njo8cwdb2" path="res://art/alien-04.png" id="4_1frsg"]
+[ext_resource type="Texture2D" uid="uid://c7pfm0km7qgpf" path="res://art/alien-05.png" id="5_5sugi"]
+[ext_resource type="Texture2D" uid="uid://dllepg1m5n8r" path="res://art/alien-06.png" id="6_ejfuu"]
+[ext_resource type="Texture2D" uid="uid://gdt0v0ibs28u" path="res://art/alien-07.png" id="7_arfiu"]
+[ext_resource type="Texture2D" uid="uid://tdil1jpvx811" path="res://art/alien-08.png" id="8_0053q"]
+[ext_resource type="Texture2D" uid="uid://51dy1hlxem4x" path="res://art/alien-09.png" id="9_e5e8x"]
+[ext_resource type="Texture2D" uid="uid://b7dmdbsxsn0k0" path="res://art/alien-10.png" id="10_64my7"]
+[ext_resource type="Texture2D" uid="uid://uq522did8kts" path="res://art/alien-11.png" id="11_jhnt5"]
+[ext_resource type="Texture2D" uid="uid://velnq12vtbtv" path="res://art/alien-12.png" id="12_gg6ca"]
+[ext_resource type="Texture2D" uid="uid://bbf8h6jdaat8q" path="res://art/alien-13.png" id="13_wgjln"]
+[ext_resource type="Texture2D" uid="uid://x2p3quw8dhqp" path="res://art/alien-14.png" id="14_tlela"]
+[ext_resource type="Texture2D" uid="uid://n7to44d7y7oa" path="res://art/alien-15.png" id="15_vkyu6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_84ky3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jclsd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_mx2gs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2wf4j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1frsg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5sugi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ejfuu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_arfiu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_0053q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_e5e8x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_64my7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_jhnt5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_gg6ca")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_wgjln")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_tlela")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_vkyu6")
+}],
+"loop": true,
+"name": &"pulse",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o5bdm"]
+radius = 30.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6kceq"]
+radius = 100.0
+
+[node name="Mine" type="RigidBody2D"]
+show_behind_parent = true
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_jlscr")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_84ky3")
+animation = &"pulse"
+autoplay = "pulse"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.6, 0.6)
+shape = SubResource("CircleShape2D_o5bdm")
+
+[node name="DetectionRadius" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRadius"]
+shape = SubResource("CircleShape2D_6kceq")
+
+[connection signal="area_entered" from="DetectionRadius" to="." method="_on_detection_radius_area_entered"]
+[connection signal="area_exited" from="DetectionRadius" to="." method="_on_detection_radius_area_exited"]

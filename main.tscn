@@ -1,0 +1,79 @@
+[gd_scene load_steps=10 format=3 uid="uid://yuqibvwqn1g2"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_3jmru"]
+[ext_resource type="Texture2D" uid="uid://q7yywlcnkoid" path="res://art/star-bg-01.png" id="1_u5wyn"]
+[ext_resource type="Script" path="res://background.gd" id="2_05kyh"]
+[ext_resource type="Texture2D" uid="uid://dottc6u2aallg" path="res://art/star-bg-02.png" id="3_u7u0u"]
+[ext_resource type="Texture2D" uid="uid://crlpitf5x4fjj" path="res://art/star-bg-03.png" id="4_pnk0q"]
+[ext_resource type="Texture2D" uid="uid://dgpcvp77clvdq" path="res://art/star-fg-01.png" id="5_5b7hv"]
+[ext_resource type="PackedScene" uid="uid://dx6dpqto4l76f" path="res://hud.tscn" id="9_5dinu"]
+[ext_resource type="AudioStream" uid="uid://bbj6lg6wdjsqq" path="res://sfx/deeper.wav" id="10_txgdb"]
+
+[sub_resource type="Curve2D" id="Curve2D_e1q37"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1280, 0)
+}
+point_count = 2
+
+[node name="Main" type="Node"]
+script = ExtResource("1_3jmru")
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="EnemyTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(640, 480)
+
+[node name="EnemyPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_e1q37")
+
+[node name="EnemySpawn" type="PathFollow2D" parent="EnemyPath"]
+
+[node name="Background" type="ParallaxBackground" parent="."]
+offset = Vector2(640, 360)
+scale = Vector2(1.2, 1.2)
+transform = Transform2D(1.2, 0, 0, 1.2, 640, 360)
+script = ExtResource("2_05kyh")
+
+[node name="StaticStars" type="Sprite2D" parent="Background"]
+texture = ExtResource("1_u5wyn")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Background"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(0, 2160)
+metadata/_edit_group_ = true
+
+[node name="DistantStars" type="Sprite2D" parent="Background/ParallaxLayer"]
+texture = ExtResource("3_u7u0u")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Background"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(0, 2160)
+metadata/_edit_group_ = true
+
+[node name="CloseStars" type="Sprite2D" parent="Background/ParallaxLayer2"]
+texture = ExtResource("4_pnk0q")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="Background"]
+z_index = 1000
+z_as_relative = false
+motion_scale = Vector2(1.2, 1.2)
+motion_mirroring = Vector2(0, 2160)
+metadata/_edit_group_ = true
+
+[node name="NebulaClouds" type="Sprite2D" parent="Background/ParallaxLayer3"]
+texture = ExtResource("5_5b7hv")
+
+[node name="HUD" parent="." instance=ExtResource("9_5dinu")]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_txgdb")
+volume_db = -15.0
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]

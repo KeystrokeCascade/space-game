@@ -1,0 +1,198 @@
+[gd_scene load_steps=10 format=3 uid="uid://dx6dpqto4l76f"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_iaf0o"]
+[ext_resource type="Theme" uid="uid://7g6a1cj5x73r" path="res://theme.tres" id="2_42y1m"]
+[ext_resource type="PackedScene" uid="uid://ev85irn573c5" path="res://pause.tscn" id="3_crig1"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_it0l3"]
+action = &"start_game"
+
+[sub_resource type="Shortcut" id="Shortcut_t2wyb"]
+events = [SubResource("InputEventAction_it0l3")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_k11v7"]
+action = &"pause_game"
+
+[sub_resource type="Shortcut" id="Shortcut_jhhyp"]
+events = [SubResource("InputEventAction_k11v7")]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w21j4"]
+bg_color = Color(0.996078, 0, 0.129412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqms4"]
+bg_color = Color(0.34902, 0.592157, 1, 1)
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_iaf0o")
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 10.0
+offset_right = 50.0
+offset_bottom = 76.0
+theme = ExtResource("2_42y1m")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -76.0
+offset_right = 125.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_42y1m")
+theme_override_font_sizes/font_size = 64
+text = "Space Game!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="MessageLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -133.0
+offset_top = 100.0
+offset_right = 133.0
+offset_bottom = 158.0
+grow_horizontal = 2
+theme = ExtResource("2_42y1m")
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreditLabel" type="Label" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -352.0
+offset_top = -360.0
+offset_bottom = 360.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("2_42y1m")
+theme_override_font_sizes/font_size = 24
+text = "Credits:
+
+Knowledge and Tutorials
+    Godot beginner tutorial
+    Godot documentation
+
+Assets
+    MillionthVector
+    Uncredited from unit site
+
+Audio
+    KIZILSUNGUR
+    ljudman
+    Mrthenoronha
+    Robinhood76
+    Uncredited from unit site
+
+Font
+    Ubuntu"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -76.0
+offset_top = -220.0
+offset_right = 76.0
+offset_bottom = -139.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+theme = ExtResource("2_42y1m")
+theme_override_font_sizes/font_size = 64
+shortcut = SubResource("Shortcut_t2wyb")
+text = "Start"
+
+[node name="PauseButton" type="Button" parent="."]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 56.0
+grow_horizontal = 0
+focus_mode = 0
+theme = ExtResource("2_42y1m")
+theme_override_font_sizes/font_size = 24
+shortcut = SubResource("Shortcut_jhhyp")
+text = "||"
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -16.0
+offset_right = 320.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_w21j4")
+step = 1.0
+show_percentage = false
+
+[node name="BossHealthBar" type="ProgressBar" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.0
+offset_top = 16.0
+offset_right = 320.0
+offset_bottom = 20.0
+grow_horizontal = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_w21j4")
+max_value = 1000.0
+step = 1.0
+show_percentage = false
+
+[node name="ItemBar" type="ProgressBar" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -32.0
+offset_right = 320.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_eqms4")
+max_value = 10.0
+show_percentage = false
+
+[node name="Pause" parent="." instance=ExtResource("3_crig1")]
+visible = false
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

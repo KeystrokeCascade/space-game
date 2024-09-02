@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://ev85irn573c5"]
+
+[ext_resource type="FontFile" uid="uid://kd7kdr3luosi" path="res://fonts/Ubuntu/Ubuntu-Regular.ttf" id="1_c0v8h"]
+[ext_resource type="Script" path="res://pause.gd" id="1_ja5b2"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_sb47q"]
+action = &"pause_game"
+
+[sub_resource type="Shortcut" id="Shortcut_71sui"]
+events = [SubResource("InputEventAction_sb47q")]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_ja5b2")
+
+[node name="PauseLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -40.0
+offset_right = 125.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.666667, 0.666667, 0.666667, 1)
+theme_override_fonts/font = ExtResource("1_c0v8h")
+theme_override_font_sizes/font_size = 64
+text = "Paused!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ResumeButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = 48.0
+offset_right = 58.0
+offset_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_colors/font_color = Color(0.666667, 0.666667, 0.666667, 1)
+theme_override_fonts/font = ExtResource("1_c0v8h")
+theme_override_font_sizes/font_size = 24
+shortcut = SubResource("Shortcut_71sui")
+text = "Resume"
+
+[connection signal="pressed" from="ResumeButton" to="." method="_on_resume_button_pressed"]

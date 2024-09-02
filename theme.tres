@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://7g6a1cj5x73r"]
+
+[ext_resource type="FontFile" uid="uid://kd7kdr3luosi" path="res://fonts/Ubuntu/Ubuntu-Regular.ttf" id="1_60u73"]
+
+[resource]
+default_font = ExtResource("1_60u73")
+default_font_size = 24
+Button/colors/font_color = Color(0.666667, 0.666667, 0.666667, 1)
+Label/colors/font_color = Color(0.666667, 0.666667, 0.666667, 1)
+Label/font_sizes/font_size = 24

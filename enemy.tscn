@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://dqk60gipmnk6n"]
+
+[ext_resource type="Texture2D" uid="uid://br21ob04uvkkm" path="res://art/enemy-01.png" id="1_20pqo"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_cd7x6"]
+[ext_resource type="Texture2D" uid="uid://bvfalqmsday1d" path="res://art/enemy-02.png" id="2_6g33h"]
+[ext_resource type="Texture2D" uid="uid://jfnln2e2a6pq" path="res://art/enemy-03.png" id="3_1aiyi"]
+[ext_resource type="Texture2D" uid="uid://c5y5grb31bo6t" path="res://art/enemy-04.png" id="4_i3u26"]
+[ext_resource type="AudioStream" uid="uid://bmcfdxubl85ca" path="res://sfx/sonar.wav" id="6_77nf1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_02scc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_20pqo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_6g33h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1aiyi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_i3u26")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvc31"]
+radius = 24.0
+height = 82.0
+
+[node name="Enemy" type="RigidBody2D"]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_cd7x6")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_02scc")
+animation = &"fly"
+autoplay = "fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CapsuleShape2D_vvc31")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="ZigZagTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="MineSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_77nf1")
+volume_db = -20.0
+max_polyphony = 20
+
+[node name="MineTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="ZigZagTimer" to="." method="_on_zig_zag_timer_timeout"]
+[connection signal="timeout" from="MineTimer" to="." method="_on_mine_timer_timeout"]

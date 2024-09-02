@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://b1swxapw1eqyt"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_be1wa"]
+[ext_resource type="Texture2D" uid="uid://wga2xp6htbw5" path="res://art/ship-01.png" id="1_gw5hx"]
+[ext_resource type="Texture2D" uid="uid://7rsmjjml2t61" path="res://art/ship-02.png" id="2_egigc"]
+[ext_resource type="Texture2D" uid="uid://bssu3s4su6jne" path="res://art/ship-03.png" id="3_p8l88"]
+[ext_resource type="Texture2D" uid="uid://3cymld37jas6" path="res://art/ship-04.png" id="4_mlmwy"]
+[ext_resource type="AudioStream" uid="uid://dw1voog7i2qmk" path="res://sfx/item.wav" id="7_yu18q"]
+[ext_resource type="AudioStream" uid="uid://dtat06rntigld" path="res://sfx/laser.wav" id="8_bvcg1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eiewt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gw5hx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_egigc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_p8l88")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mlmwy")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8xe3r"]
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_be1wa")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_eiewt")
+animation = &"fly"
+autoplay = "fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_8xe3r")
+
+[node name="BulletSpawn" type="Marker2D" parent="."]
+position = Vector2(0, -40)
+
+[node name="BulletSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_bvcg1")
+max_polyphony = 20
+
+[node name="BulletTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="ItemSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_yu18q")
+volume_db = -10.0
+max_polyphony = 20
+
+[node name="ItemTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="ItemTimer" to="." method="_on_item_timer_timeout"]

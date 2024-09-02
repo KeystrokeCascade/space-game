@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbu8g2fgmn2ku"]
+
+[ext_resource type="Texture2D" uid="uid://b2fo2n5gyknvr" path="res://art/boss.png" id="1_0s5vc"]
+[ext_resource type="Script" path="res://boss.gd" id="1_g0h1w"]
+[ext_resource type="AudioStream" uid="uid://dhlp6oygbt86q" path="res://sfx/missile.wav" id="3_v74wp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_63ycy"]
+radius = 185.0
+
+[node name="Boss" type="RigidBody2D"]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_g0h1w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(-2, -2)
+texture = ExtResource("1_0s5vc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_63ycy")
+
+[node name="MissileSpawn" type="Marker2D" parent="."]
+position = Vector2(0, 180)
+
+[node name="MissileSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_v74wp")
+volume_db = -10.0
+max_polyphony = 20
+
+[node name="MissileTimer" type="Timer" parent="."]
+wait_time = 2.7
+autostart = true
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="MissileTimer" to="." method="_on_missile_timer_timeout"]
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]

@@ -1,0 +1,68 @@
+[gd_scene load_steps=13 format=3 uid="uid://b35u5lckpsdvg"]
+
+[ext_resource type="Texture2D" uid="uid://cvmqka623t3s8" path="res://art/missile-01.png" id="1_0rhwb"]
+[ext_resource type="Script" path="res://missile.gd" id="1_dn136"]
+[ext_resource type="Texture2D" uid="uid://4c5085cu55nn" path="res://art/missile-02.png" id="2_h84jr"]
+[ext_resource type="Texture2D" uid="uid://da3gf10kh11j2" path="res://art/missile-03.png" id="3_u6ju0"]
+[ext_resource type="Texture2D" uid="uid://ba5l3utjhm5ii" path="res://art/missile-04.png" id="4_3035p"]
+[ext_resource type="Texture2D" uid="uid://yhr2s10soxo4" path="res://art/missile-05.png" id="5_g4laf"]
+[ext_resource type="Texture2D" uid="uid://xd5vokjberjj" path="res://art/missile-06.png" id="6_fqjy3"]
+[ext_resource type="Texture2D" uid="uid://c7mdyqlim5qh7" path="res://art/missile-07.png" id="7_2rk38"]
+[ext_resource type="Texture2D" uid="uid://cl3uhpjmg05oo" path="res://art/missile-08.png" id="8_6sasb"]
+[ext_resource type="Texture2D" uid="uid://dc5yis71yf8lv" path="res://art/missile-09.png" id="9_ef45h"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f6adt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0rhwb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_h84jr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_u6ju0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3035p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_g4laf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fqjy3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2rk38")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6sasb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ef45h")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 20.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w04rc"]
+radius = 25.0
+height = 70.0
+
+[node name="Missile" type="Area2D"]
+script = ExtResource("1_dn136")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_f6adt")
+animation = &"shoot"
+autoplay = "shoot"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 20)
+shape = SubResource("CapsuleShape2D_w04rc")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
