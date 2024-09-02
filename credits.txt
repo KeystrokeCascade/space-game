@@ -1,0 +1,17 @@
+Knowledge and Tutorials
+	Godot beginner tutorial (https://docs.godotengine.org/en/stable/getting_started/first_2d_game)
+	Godot documentation (https://docs.godotengine.org)
+
+Assets
+	MillionthVector (http://millionthvector.blogspot.com/p/free-sprites.html)
+	Uncredited from unit site (seriously all the assets other than the alien have no attribution)
+
+Audio
+	KIZILSUNGUR (https://freesound.org/people/KIZILSUNGUR/sounds/70299/)
+	ljudman (https://freesound.org/people/ljudman/sounds/33245/)
+	Mrthenoronha (https://freesound.org/people/Mrthenoronha/sounds/516825/)
+	Robinhood76 (https://freesound.org/people/Robinhood76/sounds/273332/)
+	Uncredited from unit site
+
+Font
+	Ubuntu (https://design.ubuntu.com/font)

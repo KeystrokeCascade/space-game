@@ -1,0 +1,21 @@
+Features over the MVP:
+	Random enemy spawning
+	Random enemy movement and speed
+	Enemies able to drop magnetic mines that do extra damage
+	Variable damage amounts (not just boolean destroyed or not)
+	Score based on enemies destroyed
+	Gun auto-fire (for those not wanting carpal-tunnel)
+	Player ship constrained by screen limits
+	A lot of sound effects for every action
+	Possibly some other stuff I forgot because I built this by looking at what features needed to be implemented that week, then implemented them in whatever way I thought made sense (e.g. enemy spawning was actually introduced with enemies because I didn't want to manually place them)
+
+Features for the assessment:
+	Fully functional main menu that is returned to after each death for infinite replays and pausing
+	Several power-ups including different fire modes and health with a timer so they are not overused
+	Boss enemies that spawn in every 30 points with unique weapons and movement, as well as a frenzy state caused by the player doing damage
+
+Things that I would have liked to add if I had more time:
+	A proper "ship" and "object" class to use for inheritance to reduce duplication of functions and variables
+	Modular power-up system using proper objects instead of if-else statements if I didn't lack the time and brain-power (there is a reason I'm not a programmer)
+	Better feedback to the player with particle effects, screen shake, flashing, and temporary invincibility
+	Improve performance, Im not sure if its a bug with Godot or me but the debug profiler shows the scrolling background image as the only image in memory infinitely so there might be something up with that?
