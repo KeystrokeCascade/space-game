@@ -1,2 +1,2 @@
-# space-game
- A simple top down galaga-clone made for school
+# Space Game
+A simple top down galaga-clone made for school.  Aside from the power-ups which were done last minute I think it came out rather well, though a bit generic so don't expect anything mind-blowing.
